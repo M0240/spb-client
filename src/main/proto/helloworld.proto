@@ -1,0 +1,40 @@
+syntax = "proto3";
+//python -m grpc_tools.protoc --python_out=. --grpc_python_out=. -I. hello.proto
+option java_multiple_files = false;
+//@3 生成java类所在的包
+option java_package = "com.edu.signalAlgorithm.proto";
+//@4 生成外层类类名
+option java_outer_classname = "HelloProto";
+
+package helloworld;
+
+
+service Greeter {
+
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+
+message HelloRequest {
+    string name = 1;
+
+}
+
+message HelloReply {
+    string message = 1;
+    repeated TimeDomainFeatures tdf = 2;
+}
+//TimeDomainFeatures时域特征实体对象
+message TimeDomainFeatures {
+    double mean = 1;                //1_均值（平均幅值）
+    double std = 2;                 //2_标准差
+    double rootAmplitude = 3;       //3_方根幅值
+    double rms = 4;                 //4_RMS均方根
+    double peakToPeak = 5;          //5_峰峰值
+    double skewness = 6;            //6_偏度 skewness
+    double kurtosis = 7;            //7_峭度 Kurtosis
+    double crestFactor = 8;         //8_峰值因子 Crest Factor
+    double clearanceFactor = 9;     //9_裕度因子  Clearance Factor
+    double shapeFactor = 10;        //10_波形因子 Shape Factor
+    double impulseFactor = 11;      //11_脉冲指数 Impulse Factor
+}
